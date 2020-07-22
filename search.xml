@@ -1,8 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java实现二叉树的插入删除和遍历结点</title>
+    <url>//blog/</url>
+    <content><![CDATA[<h2 id="java实现二叉树的插入，删除，查询，和前序遍历，中序遍历，以及后序遍历结点。"><a href="#java实现二叉树的插入，删除，查询，和前序遍历，中序遍历，以及后序遍历结点。" class="headerlink" title="java实现二叉树的插入，删除，查询，和前序遍历，中序遍历，以及后序遍历结点。"></a>java实现二叉树的插入，删除，查询，和前序遍历，中序遍历，以及后序遍历结点。</h2><p><strong>花费几天时间终于比较清楚的能理解二叉树的精髓了，大家可以参考</strong><br><strong>点击进入</strong></p>
+<a id="more"></a>
+
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.st.binarytreedemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Description</span>: 定义一个二叉树创建使用类  对结点的初始化</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>:</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinaryTreeDemo</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> static void main(String[] args) &#123;</span><br><span class="line">        <span class="comment">//创建一个二叉树</span></span><br><span class="line">        BinaryTree binaryTree = new BinaryTree();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建需要的结点</span></span><br><span class="line">        Node root = new Node(<span class="number">6</span>);</span><br><span class="line">        Node node1 = new Node(<span class="number">2</span>);</span><br><span class="line">        Node node2 = new Node(<span class="number">5</span>);</span><br><span class="line">        Node node6 = new Node(<span class="number">10</span>);</span><br><span class="line">        Node node4 = new Node(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把结点全部连接起来</span></span><br><span class="line">        root.setLeft(node1);</span><br><span class="line">        root.setRight(node6);</span><br><span class="line">        node1.setLeft(node2);</span><br><span class="line">        node6.setLeft(node4);</span><br><span class="line">        binaryTree.setRoot(root);</span><br><span class="line"></span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"测试前序遍历"</span>);</span><br><span class="line">        binaryTree.preOrder();</span><br><span class="line"><span class="comment">//        System.out.println("测试中序遍历");</span></span><br><span class="line"><span class="comment">//        binaryTree.inOrder();</span></span><br><span class="line"><span class="comment">//        System.out.println("前序遍历查找");</span></span><br><span class="line"><span class="comment">//        Node st = binaryTree.preOrderSearch(1);</span></span><br><span class="line"><span class="comment">//        System.out.println(st);</span></span><br><span class="line"><span class="comment">//        System.out.println("删除值为3 的结点");</span></span><br><span class="line"><span class="comment">//        binaryTree.delNode(3);</span></span><br><span class="line"><span class="comment">//        binaryTree.inOrder();</span></span><br><span class="line"><span class="comment">//        System.out.println("删除值为2的结点");</span></span><br><span class="line"><span class="comment">//        binaryTree.delNode(2);</span></span><br><span class="line"><span class="comment">//        binaryTree.preOrder();</span></span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"插入7"</span>);</span><br><span class="line"><span class="comment">//        root.insertNode(root,7);</span></span><br><span class="line">        binaryTree.insertNode(root,<span class="number">8</span>);</span><br><span class="line">        binaryTree.insertNode(root,<span class="number">9</span>);</span><br><span class="line">        binaryTree.preOrder();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Description</span>:定义一个二叉树</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span>:定义插入删除查询遍历查询的方法</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Node getRoot() &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void setRoot(Node root) &#123;</span><br><span class="line">        <span class="keyword">this</span>.root = root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 删除结点的方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:  </span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> void delNode(int value)&#123;</span><br><span class="line">        <span class="comment">// 判断是否是空树</span></span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">//判断是否只要root一个结点</span></span><br><span class="line">            <span class="keyword">if</span>(root.getValue() == value)&#123;</span><br><span class="line">                root = <span class="literal">null</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 如果满足前面 则进行递归删除</span></span><br><span class="line">                root.delNode(value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(<span class="string">"是空树，没办法删除"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 插入结点的方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> void insertNode(Node root,int value)&#123;</span><br><span class="line">        root.insertNode(root,value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 前序遍历,中序遍历，后续遍历 只要根节点不为空</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> void preOrder()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.root.preOrder();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(<span class="string">"根节点为空，无法遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void inOrder()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.root.inOrder();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(<span class="string">"根节点为空，无法遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void postOrder()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.root.postOrder();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(<span class="string">"根节点为空，无法遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 分别进行前序中序和后序遍历查找</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:  返回查找的值和查询次数</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span> </span><br><span class="line">    <span class="comment">//前序遍历查找</span></span><br><span class="line">    <span class="keyword">public</span> Node preOrderSearch(int value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.root.preOrderSearch(value);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//中序遍历查找</span></span><br><span class="line">    <span class="keyword">public</span> Node inOrderSearch(int value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">//根节点不为空的话 就进行递归查找</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.root.inOrderSearch(value);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//后序遍历查找</span></span><br><span class="line">    <span class="keyword">public</span> Node postOrderSearch(int value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.root.postOrderSearch(value);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@program</span>: binarytreedemo-&gt;Node</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 节点的遍历方法创建</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: sitong</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-07-26 10:17</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> int value;</span><br><span class="line">    <span class="keyword">private</span> Node left;</span><br><span class="line">    <span class="keyword">private</span> Node right; <span class="comment">// 默认为空</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 构造器  定义value的值</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> Node(int value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get set方法  获取参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Node getLeft() &#123;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void setLeft(Node left) &#123;</span><br><span class="line">        <span class="keyword">this</span>.left = left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Node getRight() &#123;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void setRight(Node right) &#123;</span><br><span class="line">        <span class="keyword">this</span>.right = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> int getValue() &#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> void setValue(int value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>:重写tostring方法,输出对象时调用toString()</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String toString() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Node&#123;"</span> +</span><br><span class="line">                <span class="string">"value="</span> + value +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 定义一个插入方法  插入规则是 大于根结点值就在右边，小于结点值就在</span></span><br><span class="line"><span class="comment">     * 左边。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Node insertNode(Node root,int value)&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)&#123;</span><br><span class="line">            root.value = value;</span><br><span class="line">            <span class="keyword">return</span> new Node(value);</span><br><span class="line">        &#125;</span><br><span class="line">        Node temp = root;</span><br><span class="line">        <span class="keyword">while</span>(root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root.value&lt;value)&#123;</span><br><span class="line">                <span class="keyword">if</span>(root.right == <span class="literal">null</span>)&#123;</span><br><span class="line">                    root.right = new Node(value);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(root.value == value)&#123;</span><br><span class="line">                System.<span class="keyword">out</span>.println(<span class="string">"值已经存在，不能插入"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(root.left == <span class="literal">null</span>)&#123;</span><br><span class="line">                    root.left = new Node(value);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 定义一个删除结点</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: value 结点值</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:  返回将删除的结点置为空 不是叶子结点的话直接删除</span></span><br><span class="line"><span class="comment">     * 递归删除要注意的是 必须通过当前结点取删除子节点  不能直接删除当前结点</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> void delNode(int value)&#123;</span><br><span class="line">        <span class="comment">//先判断当前结点的左子结点是否是，是的话直接置为空  结束递归</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span> &amp;&amp; <span class="keyword">this</span>.left.value == value)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 然后在右子树递归查找，如果右子树就是查找的  直接删除此子树  叶子结点就只删除结点</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span> &amp;&amp; <span class="keyword">this</span>.right.value == value)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果上面不成立  就左子树递归查找</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.delNode(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 右子树遍历</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.delNode(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>:前序遍历方法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> void preOrder()&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先输出当前结点</span></span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.toString());</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.preOrder();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.preOrder();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>:中序遍历方法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> void inOrder()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.inOrder();</span><br><span class="line">        &#125;</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.toString());</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.inOrder();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>:后续遍历方法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Date</span>:</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> void postOrder()&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.postOrder();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.postOrder();</span><br><span class="line">        &#125;</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span>: 前序遍历查找</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>: 传入value参数</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span>:  如果找到相等结点则返回此结点，如果找不到，则返回null</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Node preOrderSearch(int value)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这句话一定要写在比较语句前面 因为可能有判断是否是空 但是没有进行比较的</span></span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"进入前序遍历"</span>);</span><br><span class="line">        <span class="comment">//比较当前结点是不是，是的话返回给tempNode</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.value == value)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node tempNode = <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//递归查找 如果左子节点不为空则一直递归前序查找</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            tempNode = <span class="keyword">this</span>.left.preOrderSearch(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果不为空，则证明在左子树查到结点 ，返回结点</span></span><br><span class="line">        <span class="keyword">if</span>(tempNode != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> tempNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            tempNode = <span class="keyword">this</span>.right.preOrderSearch(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tempNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 中序遍历查找</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>:  如果找到相等结点则返回此结点，如果找不到，则返回null</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Node inOrderSearch(int value)&#123;</span><br><span class="line"></span><br><span class="line">        Node tempNode = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            tempNode = <span class="keyword">this</span>.left.inOrderSearch(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tempNode != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> tempNode;</span><br><span class="line">        &#125;</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"进入中序遍历"</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.value == value)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            tempNode = <span class="keyword">this</span>.right.inOrderSearch(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tempNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 后序遍历查找</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>:value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>:  如果找到相等结点则返回此结点，如果找不到，则返回null</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>: sitong</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Node postOrderSearch(int value)&#123;</span><br><span class="line"></span><br><span class="line">        Node tempNode = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.left != <span class="literal">null</span>)&#123;</span><br><span class="line">            tempNode = <span class="keyword">this</span>.left.inOrderSearch(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tempNode != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> tempNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.right != <span class="literal">null</span>)&#123;</span><br><span class="line">            tempNode = <span class="keyword">this</span>.right.inOrderSearch(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"进入后续遍历"</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.value == value)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tempNode;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>java二叉树</category>
+      </categories>
+      <tags>
+        <tag>Java二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>eclipse源代码问题</title>
+    <url>//blog/</url>
+    <content><![CDATA[<p>关于eclipse切换过工作空间后,查看源码显示Failed to create the part’s controls报错<br><img src="eclipse%E6%BA%90%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98-1/1.jpg" alt=""></p>
+<a id="more"></a>
+<p>虽然这是个很小的问题，但是还是算比较细节了，根本就在于是jdk目录下找不到src.zip文件。</p>
+<p>我们依次点击windows-&gt;首选项-&gt;java-&gt;已安装的JRE</p>
+<p><img src="eclipse%E6%BA%90%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98-1/2.jpg" alt=""><br>根据上图找到对应的位置，然后点击一下，在点击编辑<br><img src="eclipse%E6%BA%90%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98-1/3.jpg" alt=""><br>然后在JRE系统库下面找到\lib\rt.jar，点击以下，如图所示，可以看到显示源代码连接：(无)<br><img src="eclipse%E6%BA%90%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98-1/4.jpg" alt=""><br>然后接下来就要选择你的外部文件了，要先找到你jdk的包在哪里，如果不知道的话可以进入环境变量查看一下，右键我的电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;JAVA_HOME<br><img src="eclipse%E6%BA%90%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98-1/5.jpg" alt=""></p>
+<p>按照上图指示，找到之后点进去，然后选择src.zip就能解决了。<br><img src="eclipse%E6%BA%90%E4%BB%A3%E7%A0%81%E9%97%AE%E9%A2%98-1/6.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>程序员的疑难杂症</category>
+      </categories>
+      <tags>
+        <tag>eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hadoop-2.6.0伪分布搭建</title>
+    <url>//blog/</url>
+    <content><![CDATA[<h3 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h3><ol>
+<li>解压jdk到想要的位置</li>
+</ol>
+<p><img src="hadoop-2-6-0/1.png" alt=""></p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">sudo tar -zxvf jdk<span class="number">-8</span>u<span class="number">25</span>-linux-<span class="keyword">x</span><span class="number">64</span>.gz -<span class="keyword">c</span> /home/st/java</span><br></pre></td></tr></table></figure>
+
+<p><img src="hadoop-2-6-0/2.png" alt=""></p>
+<a id="more"></a>
+
+<ol start="2">
+<li>配置jdk环境变量<br>进入etc/profile文件</li>
+</ol>
+<p><img src="hadoop-2-6-0/3.png" alt=""></p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">vi</span> /etc/<span class="keyword">profile</span></span><br></pre></td></tr></table></figure>
+
+<p>在配置文件末尾加入下列内容，并将jdk路径改成自己的位置</p>
+<p><img src="hadoop-2-6-0/4.png" alt=""></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/home/st/java/jdk1.8.0_171  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JRE_HOME</span>=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre   </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CLASSPATH</span>=.:$&#123;JAVA_HOME&#125;/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:$PATH:$HADOOP_HOME/bin:$PATH:$ANT_HOME/bin</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使配置立即生效</li>
+</ol>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"><span class="keyword">source</span> <span class="regexp">/etc/</span>profile</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>查看安装的jdk</li>
+</ol>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">java -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="hadoop-2-6-0/5.png" alt=""></p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">javac</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="hadoop-2-6-0/6.png" alt=""></p>
+<h3 id="ssh免密码登录"><a href="#ssh免密码登录" class="headerlink" title="ssh免密码登录"></a>ssh免密码登录</h3><ol>
+<li>安装ssh：<br>安装命令：</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install openssh-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>启动服务:</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/ssh start</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查看服务是否启动</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ps</span> -<span class="keyword">e</span> | <span class="keyword">grep</span> ssh</span><br></pre></td></tr></table></figure>
+
+<p><img src="hadoop-2-6-0/20.png" alt=""> </p>
+<ol start="4">
+<li>设置免密码登录，生成私钥和公钥：</li>
+</ol>
+<p><img src="hadoop-2-6-0/17.png" alt=""> </p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">ssh-keygen -<span class="built_in">t</span> rsa -P <span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>默认会在/home/st/.ssh下生成两个文件: id_rsa和id_rsa.pub，前者为私钥，后者为公钥、(/ssh文件是隐藏文件，CTRL+H显示隐藏文件)</li>
+</ol>
+<p><img src="hadoop-2-6-0/15.png" alt=""> </p>
+<ol start="6">
+<li>将公钥追加到authorized_keys中：cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys，然后用ssh连接自己：ssh localhost。如果还是需要密码，则没有成功。  </li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa.pub &gt;&gt; ~<span class="regexp">/.ssh/</span>authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<p><img src="hadoop-2-6-0/18.png" alt=""> </p>
+<h3 id="安装配置hadoop"><a href="#安装配置hadoop" class="headerlink" title="安装配置hadoop"></a>安装配置hadoop</h3><ol>
+<li>安装解压hadoop到相应位置</li>
+</ol>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">tar -zxvf hadoop<span class="number">-2.6</span><span class="number">.0</span>.tar.gz -c /home/st</span><br></pre></td></tr></table></figure>
+
+<p> 解压完毕效果 我将解压后的安装文件改名为hadoop<br><img src="hadoop-2-6-0/7.png" alt=""><br>2. 配置 etc/profile</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">vi</span> /etc/<span class="keyword">profile</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_HOME</span>=/home/st/hadoop</span><br></pre></td></tr></table></figure>
+
+<p><img src="hadoop-2-6-0/8.png" alt=""><br>3. 配置 core-site.xml<br>需要注意的是临时文件tmp创创建在自己hadoop目录下<br>下列文档的修改都是要进入hadoop/etc/hadoop里修改,直接将内容就配置文件里</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">vi</span> <span class="selector-tag">core-site</span><span class="selector-class">.xml</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="params">&lt;configuration&gt;</span></span><br><span class="line"> <span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>fs.default.name<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span>hdfs:<span class="comment">//localhost:9000&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>HDFS的URI，文件系统:<span class="comment">//namenode标识:端口号&lt;/description&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>hadoop.tmp.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="meta-keyword">/home/</span>st<span class="meta-keyword">/hadoop/</span>tmp<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>namenode上本地的hadoop临时文件夹<span class="params">&lt;/description&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>配置 yarn-site.xml<br>ip改成自己的ip地址</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Site specific YARN configuration properties --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>192.168.203.134:8099<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>配置 hdfs-site.xml </li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">vi</span> <span class="selector-tag">hdfs-site</span><span class="selector-class">.xml</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="params">&lt;configuration&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>dfs.name.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="meta-keyword">/home/</span>st<span class="meta-keyword">/hadoop/</span>hdfs/name<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>namenode上存储hdfs名字空间元据 <span class="params">&lt;/description&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>dfs.data.dir<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="meta-keyword">/home/</span>st<span class="meta-keyword">/hadoop/</span>hdfs/data<span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>datanode上数据块的物理存储位置<span class="params">&lt;/description&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;property&gt;</span></span><br><span class="line">    <span class="params">&lt;name&gt;</span>dfs.replication<span class="params">&lt;/name&gt;</span></span><br><span class="line">    <span class="params">&lt;value&gt;</span><span class="number">1</span><span class="params">&lt;/value&gt;</span></span><br><span class="line">    <span class="params">&lt;description&gt;</span>副本个数，配置默认是<span class="number">3</span>,应小于datanode机器数量<span class="params">&lt;/description&gt;</span></span><br><span class="line"><span class="params">&lt;/property&gt;</span></span><br><span class="line"><span class="params">&lt;/configuration&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>配置 mapred-site.xml</li>
+</ol>
+<p>伪分布模式下，这个不用配置 </p>
+<h3 id="格式化-切记：只需要最开始格式化一次"><a href="#格式化-切记：只需要最开始格式化一次" class="headerlink" title="格式化   切记：只需要最开始格式化一次"></a>格式化   切记：只需要最开始格式化一次</h3><p>进入hadoop目录下</p>
+<p><img src="hadoop-2-6-0/10.png" alt=""></p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">bin/hdfs </span>namenode –format</span><br></pre></td></tr></table></figure>
+
+<p>如果遇到y/n,则选择y</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>进入hadoop目录，启动hadoop的命令 </p>
+<pre><code>sbin/start-all.sh</code></pre><p>启动之后，用jps命令查看启动进程，如和下图一样则配置成功</p>
+<p><img src="hadoop-2-6-0/11.png" alt=""></p>
+<p><img src="hadoop-2-6-0/12.png" alt=""></p>
+<p>关闭hadoop进程的命令   </p>
+<pre><code>sbin/stop-all.sh</code></pre><h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>查看web页面信息 <a href="http://localhost:50070">http://localhost:50070</a><br><img src="hadoop-2-6-0/13.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>程序员的疑难杂症</category>
+      </categories>
+      <tags>
+        <tag>hadoop-2.6.0</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>navicat12.1的安装和破解</title>
+    <url>//blog/</url>
+    <content><![CDATA[<h3 id="navicat12-1安装"><a href="#navicat12-1安装" class="headerlink" title="navicat12.1安装"></a>navicat12.1安装</h3><p>本教程仅供学习交流，请支持正版Navicat，官网地址：<a href="http://www.navicat.com.cn">www.navicat.com.cn</a><br><a href="http://www.navicat.com.cn/download/navicat-premium">点击官网下载Navicat12.1</a> </p>
+<p><img src="navicat12.1/18.jpg" alt=""> </p>
+<p>下载好之后，默认下一步进行安装 </p>
+<p><img src="navicat12.1/1.png" alt=""> </p>
+<a id="more"></a> 
+
+<p><img src="navicat12.1/2.jpg" alt=""> </p>
+<p><img src="navicat12.1/3.jpg" alt=""></p>
+<p><img src="navicat12.1/4.jpg" alt=""></p>
+<p><img src="navicat12.1/5.jpg" alt=""></p>
+<h3 id="破解软件地址："><a href="#破解软件地址：" class="headerlink" title="破解软件地址："></a>破解软件地址：</h3><p><a href="https://github.com/st-xsy/Software-Resource">点击下载</a><br><strong>提示：要想使用破解软件必须先把电脑杀毒软件关闭。</strong></p>
+<p>下载好后解压，然后点击安装</p>
+<p><img src="navicat12.1/19.jpg" alt=""></p>
+<p><strong>点击图中右上角patch，只能patch一次，所以小心，之前要知道自己安装的目录在哪里，如果不小心失误，就重新卸载了在装</strong></p>
+<p><img src="navicat12.1/6.jpg" alt=""></p>
+<p>选中自己安装目录中的exe</p>
+<p><img src="navicat12.1/7.jpg" alt=""></p>
+<p>会显示如图所示</p>
+<p><img src="navicat12.1/8.jpg" alt=""></p>
+<p>之后打开软件，点击注册</p>
+<p><img src="navicat12.1/9.jpg" alt=""></p>
+<p>然后在激活软件中点击图中所示</p>
+<p><img src="navicat12.1/10.jpg" alt=""></p>
+<p>左边秘钥默认会填上，没有就手动</p>
+<p><img src="navicat12.1/11.jpg" alt=""></p>
+<p>点击手动激活</p>
+<p><img src="navicat12.1/12.jpg" alt=""></p>
+<p>然后把左边生成的秘钥复制到破解软件中</p>
+<p><img src="navicat12.1/13.jpg" alt=""></p>
+<p>点击左下角红色框位置，会生成相应秘钥</p>
+<p><img src="navicat12.1/14.jpg" alt=""></p>
+<p>粘贴到激活码中，点击激活</p>
+<p><img src="navicat12.1/15.jpg" alt=""></p>
+<p>永久激活成功，如下图</p>
+<p><img src="navicat12.1/16.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>navicat12.1安装</category>
+      </categories>
+      <tags>
+        <tag>navicat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go语言的安装和环境变量配置</title>
+    <url>//blog/</url>
+    <content><![CDATA[<h3 id="go语言安装和环境变量的配置"><a href="#go语言安装和环境变量的配置" class="headerlink" title="go语言安装和环境变量的配置"></a>go语言安装和环境变量的配置</h3><ul>
+<li>下载完成之后，双击进行安装 </li>
+<li>然后下一步 </li>
+</ul>
+<p><img src="goImage/1.png" alt=""> </p>
+<a id="more"></a>
+
+<ul>
+<li>安装路径自己可以选择 </li>
+</ul>
+<p><img src="goImage/2.png" alt=""></p>
+<p><img src="goImage/3.png" alt=""> </p>
+<ul>
+<li>安装完成</li>
+</ul>
+<p><img src="goImage/4.png" alt=""> </p>
+<ul>
+<li>进入windows中配置环境变量</li>
+</ul>
+<p><img src="goImage/5.png" alt=""> </p>
+<ul>
+<li>在系统变量中新建GOROOT变量，然后变量值选择go安装目录  </li>
+</ul>
+<p><img src="goImage/6.png" alt=""> </p>
+<ul>
+<li>然后再变量名为path的中添加个安装目录下的bin目录 </li>
+</ul>
+<p><img src="goImage/7.png" alt=""> </p>
+<ul>
+<li>cmd中输入go version检验一下go安装情况</li>
+</ul>
+<p><img src="goImage/8.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>go语言环境变量</category>
+      </categories>
+      <tags>
+        <tag>go语言环境变量</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
-    <url>//blog/hello-world.html</url>
+    <url>//blog/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
@@ -17,5 +256,48 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>win10重装系统</title>
+    <url>//blog/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>重装系统</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>面临找工作的程序员应届生 该怎么调整好自己心态</title>
+    <url>//blog/</url>
+    <content><![CDATA[<h2 id="进入大四的程序员该怎么给自己的未来打算"><a href="#进入大四的程序员该怎么给自己的未来打算" class="headerlink" title="进入大四的程序员该怎么给自己的未来打算"></a>进入大四的程序员该怎么给自己的未来打算</h2><h3 id="实习经历"><a href="#实习经历" class="headerlink" title="实习经历"></a>实习经历</h3><p>​    先做下自我介绍吧，我是一名来自某菜鸡学校的一名菜鸟，目前是一名应届毕业生，即将于2020.07.01毕业，对于我的经历，还是蛮曲折丰富的，分享给一些正在苦恼，在就业路上迷茫的小伙伴，小弟不才。</p>
+<p>​    和大多数大学生一样，高考毕业完之后，想的就是进入大学之后要怎么样努力来弥补自己之前的后悔，在大学里面怎样实现自己的梦想。当自己踏入大学校门之后，慢慢的才发现，之前的雄心壮志都化为了乌有，每天生活中除了到处耍，除了闲，什么也没有，也许是耍够了，自己也厌烦了这些事，就在今年5.16号，我的实习经历开始了，一场伴随着喜怒哀乐的旅行已经扬帆起航。</p>
+<p>​     对于面临着即将踏入社会，即将脱离家庭面临独立的我来说，到了找工作的时候，自己还是突然紧张了起来，对于那段时间，我永远不会忘记。我大概记得是四月份左右，我开始担心着我耗费了三年时光却什么也没学到，我该怎么办？我能拿什么来找到工作，一想到这里，心里就一阵低落，但是好在自己也迫于这种压力之下，变得积极起来，首先开始了一段时间的自学。</p>
+<p>​    其实要想自己有效率的自学，是一件很难的事，你要对自己严格要求，对于一个已经习惯懒惰的人来说，这无非是一件很困难的事。但是我也相信一句话，当枪比在自己脑袋上的时候，才会发现自己无所不能，所以我开始了一个多月真正的零基础学习java。在一个月里我学习了java相关的基础知识，甚至可以说连基础都还没有学习完，在这个时间过后，有个偶然的机会，我被一个老师推荐进入了一个正在创业的小公司，接下来就是十六天的第一次实习。 </p>
+<p>​    刚开始实习的自己，心里是又激动，又害怕。激动在自己终于能开始工作了，暂时不用担心找工作了，害怕是自己只会一点基础去了之后怎么办，去的时候，他们正好做一个python的项目，之前在学校也接触过，了解点基础，就开始了漫长的划水。对于他们来说，可能暂时对我们是没什么要求的，毕竟也是创业公司，才开始起步，只是接了一个小项目，给我们见识下，我记得很清楚的是，在这十六天里面我只写了两个接口，剩下的其他时间就聊了，终于在第十六天，我决定结束自己的工作，我觉得我可能不太适合那里。在那里，我觉得虽然没有学到很多东西，但是其实对于一个既没基础，也没技术的人来说，其实我看到了我接下来该怎么做，自己挺感谢老师的这次机会的。对于我来说，想找一个自己觉得适合的，于是便等来了刚好的春招，进行了第二波求职。</p>
+<h3 id="持续更新中！"><a href="#持续更新中！" class="headerlink" title="持续更新中！"></a>持续更新中！</h3><p>​    </p>
+]]></content>
+      <categories>
+        <category>实习的经历</category>
+      </categories>
+      <tags>
+        <tag>实习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建spark伪分布环境</title>
+    <url>//blog/</url>
+    <content><![CDATA[<p>首先是hadoop伪分布搭建好的情况下，然后下载好spark2.4的安装包</p>
+<p>在ubuntu进行解压，在下载包的那层目录下使用解压命令  </p>
+<p>tar -zxvf ~/压缩包路径</p>
+<a id="more"></a>
+<p>配置环境变量<br>用vim编辑 /etc/profile 在末尾加上以下命令</p>
+<h4 id="export-SPARK-HOME-HOME-spark解压包位置"><a href="#export-SPARK-HOME-HOME-spark解压包位置" class="headerlink" title="export SPARK_HOME=$HOME/spark解压包位置"></a><code>export SPARK_HOME=$HOME/spark解压包位置</code></h4><h4 id="export-PATH-PATH-SPARK-HOME-bin"><a href="#export-PATH-PATH-SPARK-HOME-bin" class="headerlink" title="export PATH=$PATH:${SPARK_HOME}/bin"></a><code>export PATH=$PATH:${SPARK_HOME}/bin</code></h4><p>修改后使配置立即生效</p>
+<h4 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source  /etc/profile"></a><code>source  /etc/profile</code></h4><p>进入 ${SPARK_HOME}/conf 目录</p>
+<p>拷贝 spark-env.sh.template 为 spark-env.sh</p>
+<h4 id="cp-spark-env-sh-template-spark-env-sh"><a href="#cp-spark-env-sh-template-spark-env-sh" class="headerlink" title="cp spark-env.sh.template spark-env.sh"></a><code>cp spark-env.sh.template spark-env.sh</code></h4><p>vim编辑spark-env.sh   在末尾添加 </p>
+<h4 id="export-JAVA-HOME-jdk路径"><a href="#export-JAVA-HOME-jdk路径" class="headerlink" title="export JAVA_HOME=jdk路径"></a><code>export JAVA_HOME=jdk路径</code></h4><p>接下来就是进入 ${SPARK_HOME}/sbin 目录下的 start-all.sh<br>启动之后,jps后有以下进程,就证明已经搭配成功了,在hadoop情况下增加了Master和worker两个进程。</p>
+]]></content>
+      <tags>
+        <tag>spark-2.4.0</tag>
+      </tags>
   </entry>
 </search>
