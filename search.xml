@@ -35,6 +35,49 @@
       </tags>
   </entry>
   <entry>
+    <title>go语言的安装和环境变量配置</title>
+    <url>//blog/</url>
+    <content><![CDATA[<h3 id="go语言安装和环境变量的配置"><a href="#go语言安装和环境变量的配置" class="headerlink" title="go语言安装和环境变量的配置"></a>go语言安装和环境变量的配置</h3><ul>
+<li>下载完成之后，双击进行安装 </li>
+<li>然后下一步 </li>
+</ul>
+<p><img src="goImage/1.png" alt=""> </p>
+<a id="more"></a>
+
+<ul>
+<li>安装路径自己可以选择 </li>
+</ul>
+<p><img src="goImage/2.png" alt=""></p>
+<p><img src="goImage/3.png" alt=""> </p>
+<ul>
+<li>安装完成</li>
+</ul>
+<p><img src="goImage/4.png" alt=""> </p>
+<ul>
+<li>进入windows中配置环境变量</li>
+</ul>
+<p><img src="goImage/5.png" alt=""> </p>
+<ul>
+<li>在系统变量中新建GOROOT变量，然后变量值选择go安装目录  </li>
+</ul>
+<p><img src="goImage/6.png" alt=""> </p>
+<ul>
+<li>然后再变量名为path的中添加个安装目录下的bin目录 </li>
+</ul>
+<p><img src="goImage/7.png" alt=""> </p>
+<ul>
+<li>cmd中输入go version检验一下go安装情况</li>
+</ul>
+<p><img src="goImage/8.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>go语言环境变量</category>
+      </categories>
+      <tags>
+        <tag>go语言环境变量</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hadoop-2.6.0伪分布搭建</title>
     <url>//blog/</url>
     <content><![CDATA[<h3 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h3><ol>
@@ -151,6 +194,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>//blog/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>navicat12.1的安装和破解</title>
     <url>//blog/</url>
     <content><![CDATA[<h3 id="navicat12-1安装"><a href="#navicat12-1安装" class="headerlink" title="navicat12.1安装"></a>navicat12.1安装</h3><p>本教程仅供学习交流，请支持正版Navicat，官网地址：<a href="http://www.navicat.com.cn">www.navicat.com.cn</a><br><a href="http://www.navicat.com.cn/download/navicat-premium">点击官网下载Navicat12.1</a> </p>
@@ -197,65 +258,22 @@
       </tags>
   </entry>
   <entry>
-    <title>go语言的安装和环境变量配置</title>
+    <title>搭建spark伪分布环境</title>
     <url>//blog/</url>
-    <content><![CDATA[<h3 id="go语言安装和环境变量的配置"><a href="#go语言安装和环境变量的配置" class="headerlink" title="go语言安装和环境变量的配置"></a>go语言安装和环境变量的配置</h3><ul>
-<li>下载完成之后，双击进行安装 </li>
-<li>然后下一步 </li>
-</ul>
-<p><img src="goImage/1.png" alt=""> </p>
+    <content><![CDATA[<p>首先是hadoop伪分布搭建好的情况下，然后下载好spark2.4的安装包</p>
+<p>在ubuntu进行解压，在下载包的那层目录下使用解压命令  </p>
+<p>tar -zxvf ~/压缩包路径</p>
 <a id="more"></a>
-
-<ul>
-<li>安装路径自己可以选择 </li>
-</ul>
-<p><img src="goImage/2.png" alt=""></p>
-<p><img src="goImage/3.png" alt=""> </p>
-<ul>
-<li>安装完成</li>
-</ul>
-<p><img src="goImage/4.png" alt=""> </p>
-<ul>
-<li>进入windows中配置环境变量</li>
-</ul>
-<p><img src="goImage/5.png" alt=""> </p>
-<ul>
-<li>在系统变量中新建GOROOT变量，然后变量值选择go安装目录  </li>
-</ul>
-<p><img src="goImage/6.png" alt=""> </p>
-<ul>
-<li>然后再变量名为path的中添加个安装目录下的bin目录 </li>
-</ul>
-<p><img src="goImage/7.png" alt=""> </p>
-<ul>
-<li>cmd中输入go version检验一下go安装情况</li>
-</ul>
-<p><img src="goImage/8.png" alt=""></p>
+<p>配置环境变量<br>用vim编辑 /etc/profile 在末尾加上以下命令</p>
+<h4 id="export-SPARK-HOME-HOME-spark解压包位置"><a href="#export-SPARK-HOME-HOME-spark解压包位置" class="headerlink" title="export SPARK_HOME=$HOME/spark解压包位置"></a><code>export SPARK_HOME=$HOME/spark解压包位置</code></h4><h4 id="export-PATH-PATH-SPARK-HOME-bin"><a href="#export-PATH-PATH-SPARK-HOME-bin" class="headerlink" title="export PATH=$PATH:${SPARK_HOME}/bin"></a><code>export PATH=$PATH:${SPARK_HOME}/bin</code></h4><p>修改后使配置立即生效</p>
+<h4 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source  /etc/profile"></a><code>source  /etc/profile</code></h4><p>进入 ${SPARK_HOME}/conf 目录</p>
+<p>拷贝 spark-env.sh.template 为 spark-env.sh</p>
+<h4 id="cp-spark-env-sh-template-spark-env-sh"><a href="#cp-spark-env-sh-template-spark-env-sh" class="headerlink" title="cp spark-env.sh.template spark-env.sh"></a><code>cp spark-env.sh.template spark-env.sh</code></h4><p>vim编辑spark-env.sh   在末尾添加 </p>
+<h4 id="export-JAVA-HOME-jdk路径"><a href="#export-JAVA-HOME-jdk路径" class="headerlink" title="export JAVA_HOME=jdk路径"></a><code>export JAVA_HOME=jdk路径</code></h4><p>接下来就是进入 ${SPARK_HOME}/sbin 目录下的 start-all.sh<br>启动之后,jps后有以下进程,就证明已经搭配成功了,在hadoop情况下增加了Master和worker两个进程。</p>
 ]]></content>
-      <categories>
-        <category>go语言环境变量</category>
-      </categories>
       <tags>
-        <tag>go语言环境变量</tag>
+        <tag>spark-2.4.0</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>//blog/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>win10重装系统</title>
@@ -280,24 +298,6 @@
       </categories>
       <tags>
         <tag>实习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建spark伪分布环境</title>
-    <url>//blog/</url>
-    <content><![CDATA[<p>首先是hadoop伪分布搭建好的情况下，然后下载好spark2.4的安装包</p>
-<p>在ubuntu进行解压，在下载包的那层目录下使用解压命令  </p>
-<p>tar -zxvf ~/压缩包路径</p>
-<a id="more"></a>
-<p>配置环境变量<br>用vim编辑 /etc/profile 在末尾加上以下命令</p>
-<h4 id="export-SPARK-HOME-HOME-spark解压包位置"><a href="#export-SPARK-HOME-HOME-spark解压包位置" class="headerlink" title="export SPARK_HOME=$HOME/spark解压包位置"></a><code>export SPARK_HOME=$HOME/spark解压包位置</code></h4><h4 id="export-PATH-PATH-SPARK-HOME-bin"><a href="#export-PATH-PATH-SPARK-HOME-bin" class="headerlink" title="export PATH=$PATH:${SPARK_HOME}/bin"></a><code>export PATH=$PATH:${SPARK_HOME}/bin</code></h4><p>修改后使配置立即生效</p>
-<h4 id="source-etc-profile"><a href="#source-etc-profile" class="headerlink" title="source  /etc/profile"></a><code>source  /etc/profile</code></h4><p>进入 ${SPARK_HOME}/conf 目录</p>
-<p>拷贝 spark-env.sh.template 为 spark-env.sh</p>
-<h4 id="cp-spark-env-sh-template-spark-env-sh"><a href="#cp-spark-env-sh-template-spark-env-sh" class="headerlink" title="cp spark-env.sh.template spark-env.sh"></a><code>cp spark-env.sh.template spark-env.sh</code></h4><p>vim编辑spark-env.sh   在末尾添加 </p>
-<h4 id="export-JAVA-HOME-jdk路径"><a href="#export-JAVA-HOME-jdk路径" class="headerlink" title="export JAVA_HOME=jdk路径"></a><code>export JAVA_HOME=jdk路径</code></h4><p>接下来就是进入 ${SPARK_HOME}/sbin 目录下的 start-all.sh<br>启动之后,jps后有以下进程,就证明已经搭配成功了,在hadoop情况下增加了Master和worker两个进程。</p>
-]]></content>
-      <tags>
-        <tag>spark-2.4.0</tag>
       </tags>
   </entry>
 </search>
